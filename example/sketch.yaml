@@ -1,0 +1,11 @@
+default_port: /dev/ttyACM0
+default_fqbn: 'arduino:avr:leonardo'
+profiles:
+  development:
+    fqbn: 'arduino:avr:leonardo'
+    platforms:
+      - platform: 'arduino:avr (1.8.6)'
+    libraries:
+      - 'ArduinoJson (6.21.2)'
+
+default_profile: development
