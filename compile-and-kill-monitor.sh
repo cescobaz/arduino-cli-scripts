@@ -8,33 +8,28 @@ while [[ $# -gt 0 ]]; do
       shift
       shift
       ;;
-    -c|--compile-cmd)
-      COMPILE_CMD="$2"
-      shift
-      shift
-      ;;
     -*|--*)
       echo "Unknown option $1"
       exit 1
       ;;
     *)
-      POSITIONAL_ARGS+=("$1") # save positional arg
-      shift # past argument
+      echo "Unknown arg $1"
+      exit 1
       ;;
   esac
 done
 
 if [ -z ${PORT+x} ]; then
   echo "[ERROR] missing parameter -p/--port"
+  echo "[ERROR] use 'arduino-cli board list' to list available ports"
   exit 1
 fi
 
-if [ -z ${COMPILE_CMD+x} ]; then
-  COMPILE_CMD="arduino-cli compile"
-fi
+COMPILE_CMD="arduino-cli compile"
+MONITOR_GREP_TOKEN="arduino-cli monitor"
 
 echo "[INFO] PORT: $PORT"
-echo "[INFO] MONITOR_TOKEN: $MONITOR_TOKEN"
+echo "[INFO] MONITOR_TOKEN: $MONITOR_GREP_TOKEN"
 echo "[INFO] COMPILE_CMD: $COMPILE_CMD"
 
 kill_monitor() {
@@ -42,6 +37,7 @@ kill_monitor() {
   ps aux |
     grep "arduino-cli monitor" |
     grep "$PORT" |
+    grep "$MONITOR_GREP_TOKEN" |
     grep -v 'monitor-and-upload' |
     grep -v 'compile-and-kill' |
     grep -v grep |

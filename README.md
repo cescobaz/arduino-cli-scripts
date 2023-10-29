@@ -1,5 +1,7 @@
 # Development scripts for arduino-cli
 
+A couple of shell scripts/template to make development smoother.
+
 ## Project compilation via arduino-cli
 
 In order to compile your Arduino project you have to [create a sketch.yaml file](https://arduino.github.io/arduino-cli/0.35/sketch-project-file/).
