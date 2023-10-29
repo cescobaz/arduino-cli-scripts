@@ -35,15 +35,13 @@ echo "[INFO] COMPILE_CMD: $COMPILE_CMD"
 kill_monitor() {
   echo '[INFO] killing monitor ...'
   ps aux |
-    grep "arduino-cli monitor" |
-    grep "$PORT" |
     grep "$MONITOR_GREP_TOKEN" |
+    grep "$PORT" |
     grep -v 'monitor-and-upload' |
     grep -v 'compile-and-kill' |
     grep -v grep |
     grep -v kill |
     awk '{ print $2 }' |
-    tee /dev/null |
     xargs kill
 }
 

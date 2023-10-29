@@ -40,6 +40,5 @@ while true; do
   $MONITOR_CMD
   echo '[INFO] killed monitor'
   echo '[INFO] start upload'
-  echo "$UPLOAD_CMD"
   $UPLOAD_CMD
 done
